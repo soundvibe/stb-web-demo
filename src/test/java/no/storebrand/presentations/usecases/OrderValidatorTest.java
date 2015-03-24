@@ -21,4 +21,23 @@ public class OrderValidatorTest {
         orderValidator.validateImperativelyUsingExceptions(new Order(new Product("Foo"), 10));
         assertTrue(true);
     }
+
+    @Test(expected = OrderValidator.InsufficientProductAmount.class)
+    public void whenOrdering10Products_AndIs1ProductInStock_ThrowIllegalProductAmountException_2() throws Exception {
+        OrderValidator orderValidator = new OrderValidator(name -> 1);
+        orderValidator.validateWithOptionalUsingExceptions(new Order(new Product("Foo"), 10));
+    }
+
+    @Test
+    public void whenOrdering10Products_AndIs10ProductsInStock_NoException_2() throws Exception {
+        OrderValidator orderValidator = new OrderValidator(name -> 10);
+        orderValidator.validateWithOptionalUsingExceptions(new Order(new Product("Foo"), 10));
+        assertTrue(true);
+    }
+
+    @Test(expected = OrderValidator.InsufficientProductAmount.class)
+    public void whenOrderIsNull_ThrowException() throws Exception {
+        OrderValidator orderValidator = new OrderValidator(name -> 10);
+        orderValidator.validateWithOptionalUsingExceptions(null);
+    }
 }
