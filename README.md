@@ -1,1 +1,1 @@
-# stb-web-demo
+# Demo code for "Reliable backend" workshop
