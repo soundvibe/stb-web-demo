@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
+
 /**
  * @author OZY on 2015.03.24
  */
@@ -29,7 +31,7 @@ public class Notification {
     public String errorMessage() {
         return errors.stream()
                 .map(error -> error.message)
-                .collect(Collectors.joining(", "));
+                .collect(joining(", ", "Errors: [", "]"));
     }
 
     @Override
