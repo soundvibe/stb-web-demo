@@ -4,6 +4,10 @@ import no.storebrand.presentations.entities.Order;
 import no.storebrand.presentations.entities.Product;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class OrderValidatorTest {
@@ -39,5 +43,13 @@ public class OrderValidatorTest {
     public void whenOrderIsNull_ThrowException() throws Exception {
         OrderValidator orderValidator = new OrderValidator(name -> 10);
         orderValidator.validateWithOptionalUsingExceptions(null);
+    }
+
+    @Test
+    public void whenFailsCollectOneError() throws Exception {
+        OrderValidator orderValidator = new OrderValidator(name -> 10);
+        List<String> errors = new ArrayList<>();
+        orderValidator.validateImperativelyCollectingErrors(null, errors);
+        assertEquals(1, errors.size());
     }
 }

@@ -32,7 +32,12 @@ public class UserNameValidatorTest {
     }
 
     @Test
-    public void whenCandidateIsOk_ReturnSuccess() throws Exception {
+    public void whenCandidateHasLowercaseSymbolsAndHasSpaces_ReturnTrimmedAndUppercase() throws Exception {
+        assertResultEquals(success(new UserName("FOOBAR")), UserNameValidator.validate(" Foo Bar "));
+    }
+
+    @Test
+    public void whenCandidateIsUppercase_ReturnSuccess() throws Exception {
         assertSuccess(UserNameValidator.validate("FOOBAR"));
     }
 
